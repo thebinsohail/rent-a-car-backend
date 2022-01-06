@@ -1,7 +1,7 @@
 package com.renta.application.controller;
 import com.renta.application.entity.User;
 import com.renta.application.repository.UserRepository;
-import com.renta.application.resetPassword.ResetPassword;
+import com.renta.application.dto.ResetPassword;
 import com.renta.application.service.EmailService;
 import com.renta.application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,14 +35,20 @@ public class ResetPasswordController {
     Random random=new Random(1000);
     int randomOTP;
 
-    @PostMapping("/forgot-password")
-    public String sendOTP(@RequestParam(name = "email") String email){
+    @PostMapping("/forgot-password/{email}")
+    public String sendOTP(@PathVariable(name = "email") String email){
         int OTP=random.nextInt(9999);
         randomOTP=OTP;
         System.out.println("OTP:"+OTP);
-        // TODO:send OTP using MailSender
-        emailService.sendEmail("Renta - Password Reset",email,"OTP CODE:"+OTP);
-        return "Email was sent successfully to "+email;
+        Optional<User> user=userRepository.findByEmail(email);
+        if(user.isPresent()){
+            emailService.sendEmail("Renta - Password Reset",email,"Your OTP code for password reset: "+OTP);
+            return "Email was sent successfully to "+email;
+        }
+
+
+        return "User with email "+email+" does not exists!";
+        
     }
 
     @PostMapping("/verify-otp")
@@ -66,7 +72,7 @@ public class ResetPasswordController {
               return "Your password was reset";
           }
 
-          return "There was a problem";
+          return "There was a problem resetting your password!";
 
     }
 

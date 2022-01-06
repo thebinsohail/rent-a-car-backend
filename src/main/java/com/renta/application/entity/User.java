@@ -3,7 +3,6 @@ package com.renta.application.entity;
 
 import com.sun.istack.NotNull;
 import lombok.*;
-import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
 
@@ -29,8 +28,5 @@ public class User {
     @NotNull
     @Column(name = "user_phone")
     private String phone;
-
-    @Column(name = "reset_password_token")
-    private String resetPasswordToken;
 
 }

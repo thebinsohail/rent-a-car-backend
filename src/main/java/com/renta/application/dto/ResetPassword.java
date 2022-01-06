@@ -1,4 +1,4 @@
-package com.renta.application.resetPassword;
+package com.renta.application.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

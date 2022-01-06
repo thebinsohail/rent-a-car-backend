@@ -7,9 +7,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PutMapping;
-
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,6 +27,7 @@ public class UserService {
     }
 
     /* for saving the User */
+
     public User saveUser(User user){
 
         Optional<User> findByEmail=userRepository.findByEmail(user.getEmail());
@@ -35,6 +35,7 @@ public class UserService {
         if(findByEmail.isPresent()){
             throw new RuntimeException("User Already exists with the email "+user.getEmail());
         }
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return user;
@@ -52,17 +53,16 @@ public class UserService {
                 throw new UsernameNotFoundException("User does not exists with this email!");
         }
 
-        //TODO: find by id
+        //TODO: find all
+
+        public List<User> findAllUsers(){
+
+           return userRepository.findAll();
+
+        }
 
         //TODO: forgot password
 
 
-    public void updatePassword(User user, String newPassword) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(newPassword);
-        user.setPassword(encodedPassword);
-        user.setResetPasswordToken(null);
-        userRepository.save(user);
-    }
 
 }
