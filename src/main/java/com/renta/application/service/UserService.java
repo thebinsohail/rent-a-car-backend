@@ -18,12 +18,11 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-
+    @Autowired
     PasswordEncoder passwordEncoder;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
     /* for saving the User */
@@ -41,19 +40,20 @@ public class UserService {
         return user;
     }
 
+
+
+
        /* for finding out the user */
+        public User findUser(String userName,String password) {
+            Optional<User> user=userRepository.findByUserName(userName);
+            boolean passwordExists=passwordEncoder.matches(password,user.get().getPassword());
 
-        public User findUser(User user) {
-            Optional<User> findByEmail=userRepository.findByEmail(user.getEmail());
-
-            if(findByEmail.isPresent()){
-                return user;
+            if(user.isPresent() && passwordExists){
+                return user.get();
             }
             else
-                throw new UsernameNotFoundException("User does not exists with this email!");
+                throw new UsernameNotFoundException("User "+userName+" does not exists");
         }
-
-        //TODO: find all
 
         public List<User> findAllUsers(){
 
