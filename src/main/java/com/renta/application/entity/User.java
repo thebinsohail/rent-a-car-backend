@@ -2,7 +2,10 @@ package com.renta.application.entity;
 
 
 import com.sun.istack.NotNull;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -37,5 +40,6 @@ public class User {
     @NotNull
     @Column(name = "user_phone")
     private String phone;
+
 
 }
