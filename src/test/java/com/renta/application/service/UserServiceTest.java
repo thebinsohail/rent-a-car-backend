@@ -10,6 +10,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.net.UnknownHostException;
+
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
 
@@ -39,7 +41,7 @@ class UserServiceTest {
     }
 
     @Test
-    void findUserTest(){
+    void findUserTest() throws UnknownHostException {
         String userName="abdallah";
         String password="addi";
 

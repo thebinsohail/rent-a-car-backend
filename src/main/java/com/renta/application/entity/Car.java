@@ -6,12 +6,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 
-@Getter
+@Transactional
+@Entity
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 public class Car {
 
     @Id
@@ -22,12 +24,28 @@ public class Car {
     private String carBrand;
     @Column(name = "car_name")
     private String carName;
-    @Column(name = "model_year")
-    private int modelYear;
-    // car picture
-    @Lob
-    @Column(name = "car_pic")
-    private Byte [] image;
+    @Column(name = "car_model")
+    private int model;
+    @Column(name = "car_color")
+    private String color;
 
+
+    @OneToOne(cascade = CascadeType.ALL)
+    Order order;
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

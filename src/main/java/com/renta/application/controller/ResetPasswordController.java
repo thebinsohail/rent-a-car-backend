@@ -1,4 +1,5 @@
 package com.renta.application.controller;
+import com.renta.application.dto.EmailDto;
 import com.renta.application.entity.User;
 import com.renta.application.repository.UserRepository;
 import com.renta.application.dto.ResetPassword;
@@ -35,14 +36,14 @@ public class ResetPasswordController {
     Random random=new Random(1000);
     int randomOTP;
 
-    @PostMapping("/forgot-password/{email}")
-    public String sendOTP(@PathVariable(name = "email") String email){
+    @PostMapping("/forgot-password/")
+    public String sendOTP( EmailDto email){
         int OTP=random.nextInt(9999);
         randomOTP=OTP;
         System.out.println("OTP:"+OTP);
-        Optional<User> user=userRepository.findByEmail(email);
+        Optional<User> user=userRepository.findByEmail(email.getEmailAddress().toString());
         if(user.isPresent()){
-            emailService.sendEmail("Renta - Password Reset",email,"Your OTP code for password reset: "+OTP);
+            emailService.sendEmail("Renta - Password Reset", String.valueOf(email),"Your OTP code for password reset: "+OTP);
             return "Email was sent successfully to "+email;
         }
 
