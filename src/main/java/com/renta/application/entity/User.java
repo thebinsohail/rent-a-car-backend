@@ -43,4 +43,8 @@ public class User {
     private String phone;
 
 
+    @PrePersist
+    public void setRole() {
+        this.role = "USER";
+    }
 }
