@@ -9,6 +9,6 @@ RUN mvn clean install -DskipTests
 
 # Step : Package image
 FROM openjdk:17
-EXPOSE 4567
+EXPOSE 8080
 CMD exec java $JAVA_OPTS -jar /app/my-app.jar
-COPY --from=target /build/target/application*.jar /app/my-app.jar
+COPY --from=target /build/target/renta-docker.jar /app/my-app.jar
