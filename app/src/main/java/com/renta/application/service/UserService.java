@@ -48,7 +48,7 @@ public class UserService {
 
         // saving it to the database using JPA
         userRepository.save(user);
-        emailService.sendEmail("Renta Registration", user.getEmail(), "Your account was registered with email "+user.getEmail()+"\n"+ "Dated: "+LocalDate.now()+"\n"+ "Time: "+LocalTime.now());
+       // emailService.sendEmail("Renta Registration", user.getEmail(), "Your account was registered with email "+user.getEmail()+"\n"+ "Dated: "+LocalDate.now()+"\n"+ "Time: "+LocalTime.now());
 
         return user;
     }
@@ -64,7 +64,7 @@ public class UserService {
 
             if(user.isPresent() && passwordExists){
                 String email=user.get().getEmail();
-                emailService.sendEmail("Renta Login Alert", email, "Login Attempt with IP: \n"+ InetAddress.getLocalHost().getHostAddress() +"\n"+"Host Device: \n"+InetAddress.getLocalHost().getHostName()+"\nDate and Time:\n"+ LocalDate.now()+"\n"+ LocalTime.now());
+               // emailService.sendEmail("Renta Login Alert", email, "Login Attempt with IP: \n"+ InetAddress.getLocalHost().getHostAddress() +"\n"+"Host Device: \n"+InetAddress.getLocalHost().getHostName()+"\nDate and Time:\n"+ LocalDate.now()+"\n"+ LocalTime.now());
                 return user.get();
             }
             else
