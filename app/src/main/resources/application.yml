@@ -1,0 +1,27 @@
+
+# defining datasource for spring database
+spring:
+
+# defining the jpa properties
+
+  jpa:
+    hibernate.ddl-auto: create-drop
+    generate-ddl: true
+    show-sql: true
+
+
+# Mail credentials for sending alerts
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: devteamrenta@gmail.com
+    password: hezhicarjwlqotzl
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+
